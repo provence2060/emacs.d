@@ -182,6 +182,13 @@
 (load custom-file 'noerror)
 
 (setq gc-cons-threshold best-gc-cons-threshold)
+
+    (add-hook 'LaTeX-mode-hook (lambda()
+                                  (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+                                  (setq TeX-command-default "XeLaTeX")
+                                     (setq TeX-save-query  nil )
+                                      (setq TeX-show-compilation t)
+                                                                   ))
 ;;; Local Variables:
 ;;; no-byte-compile: t
 ;;; End:
