@@ -96,8 +96,9 @@
 ;; I don't use any packages from GNU ELPA because I want to minimize
 ;; dependency on 3rd party web site.
 (setq package-archives
-      '(;; uncomment below line if you need use GNU ELPA
-        ;; ("gnu" . "https://elpa.gnu.org/packages/")
+      '(;; comment below line if you need not use GNU ELPA
+        ;;because I need auctex from GNU ELPA, so i uncomment below line
+        ("gnu" . "https://elpa.gnu.org/packages/")
         ("localelpa" . "~/.emacs.d/localelpa/")
 
         ;; ;; {{ 163 repository:
