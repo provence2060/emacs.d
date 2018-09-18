@@ -189,6 +189,10 @@
                                      (setq TeX-save-query  nil )
                                       (setq TeX-show-compilation t)
                                                                    ))
+
+;;fix chinese coding  解决中文字体显示为乱码
+(set-fontset-font "fontset-default"'gb18030' ("Microsoft YaHei" . "unicode-bmp"))
+
 ;;; Local Variables:
 ;;; no-byte-compile: t
 ;;; End:
