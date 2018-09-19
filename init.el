@@ -4,7 +4,7 @@
 ;;开启emacs，窗口设置为最大化
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-;;fix chinese coding
+;;fix chinese coding  解决中文字体显示为乱码 方框数字
 (set-fontset-font "fontset-default"'gb18030' ("Microsoft YaHei" . "unicode-bmp"))
 
 ;; Added by Package.el.  This must come before configurations of
@@ -199,9 +199,6 @@
                                      (setq TeX-save-query  nil )
                                       (setq TeX-show-compilation t)
                                                                    ))
-
-;;fix chinese coding  解决中文字体显示为乱码 方框数字
-(set-fontset-font "fontset-default"'gb18030' ("Microsoft YaHei" . "unicode-bmp"))
 
 ;;; Local Variables:
 ;;; no-byte-compile: t
