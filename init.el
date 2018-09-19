@@ -1,6 +1,9 @@
 ;; -*- coding: utf-8 -*-
 ;(defvar best-gc-cons-threshold gc-cons-threshold "Best default gc threshold value. Should't be too big.")
 
+;;开启emacs，窗口设置为最大化
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 ;;fix chinese coding
 (set-fontset-font "fontset-default"'gb18030' ("Microsoft YaHei" . "unicode-bmp"))
 
