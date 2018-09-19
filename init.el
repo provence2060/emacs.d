@@ -1,20 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;(defvar best-gc-cons-threshold gc-cons-threshold "Best default gc threshold value. Should't be too big.")
 
-;;fix chinese coding  解决中文字体显示为乱码 方框数字
- ;;(set-fontset-font "fontset-default"'gb18030' ("Microsoft YaHei" . "unicode-bmp"))
- (set-default-font "-outline-微软雅黑-normal-normal-normal-sans-21-*-*-*-p-*-iso8859-1")
- 
- ;;光标改为竖线形式
- (setq-default cursor-type 'bar)
- 
-
-;;开启emacs，窗口设置为最大化
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-;;设置竖向分割，即窗口为左右两屏，
-(setq split-height-threshold nil)
-(setq split-width-threshold 0)
 
 
 ;; Added by Package.el.  This must come before configurations of
@@ -210,6 +196,20 @@
                                       (setq TeX-show-compilation t)
                                                                    ))
 
+;;fix chinese coding  解决中文字体显示为乱码 方框数字
+ ;;(set-fontset-font "fontset-default"'gb18030' ("Microsoft YaHei" . "unicode-bmp"))
+ (set-default-font "-outline-微软雅黑-normal-normal-normal-sans-21-*-*-*-p-*-iso8859-1")
+ 
+ ;;光标改为竖线形式
+ (setq-default cursor-type 'bar)
+ 
+
+;;开启emacs，窗口设置为最大化
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+;;设置竖向分割，即窗口为左右两屏，
+(setq split-height-threshold nil)
+(setq split-width-threshold 0)
 
 
 ;;; Local Variables:
