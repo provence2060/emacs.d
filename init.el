@@ -130,7 +130,7 @@
   (require-init 'init-multiple-cursors)
   (require-init 'init-sh)
   (require-init 'init-ctags)
-     
+   ;;because I not use them,so I note them  
   ;;(require-init 'init-bbdb)
   ;;(require-init 'init-gnus)
      
