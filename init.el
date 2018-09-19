@@ -123,9 +123,9 @@
   
   
   ;; init-evil dependent on init-clipboard
-  (require-init 'init-clipboard)
+  ;; (require-init 'init-clipboard)
   ;; use evil mode (vi key binding)
-  (require-init 'init-evil)
+  ;;(require-init 'init-evil)
      
   (require-init 'init-multiple-cursors)
   (require-init 'init-sh)
