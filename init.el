@@ -197,7 +197,7 @@
                                       (setq TeX-show-compilation t)
                                                                    ))
 
-;;fix chinese coding  解决中文字体显示为乱码
+;;fix chinese coding  解决中文字体显示为乱码 方框数字
 (set-fontset-font "fontset-default"'gb18030' ("Microsoft YaHei" . "unicode-bmp"))
 
 ;;; Local Variables:
