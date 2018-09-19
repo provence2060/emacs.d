@@ -118,15 +118,20 @@
   ;; (require-init 'init-gist)
   (require-init 'init-moz)
   (require-init 'init-gtags)
+  
+  ;;不了解vim，所以暂时注释掉，并删掉了lisp文件夹中的init-evil.el   
   ;; init-evil dependent on init-clipboard
-  (require-init 'init-clipboard)
+  ;;(require-init 'init-clipboard)
   ;; use evil mode (vi key binding)
-  (require-init 'init-evil)
+  ;;(require-init 'init-evil)
+     
   (require-init 'init-multiple-cursors)
   (require-init 'init-sh)
   (require-init 'init-ctags)
-  (require-init 'init-bbdb)
-  (require-init 'init-gnus)
+     
+  ;;(require-init 'init-bbdb)
+  ;;(require-init 'init-gnus)
+     
   (require-init 'init-lua-mode)
   (require-init 'init-workgroups2)
   (require-init 'init-term-mode)
