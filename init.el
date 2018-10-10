@@ -196,6 +196,8 @@
                                       (setq TeX-show-compilation t)
                                                                    ))
 
+(add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)   ; with AUCTeX LaTeX mode
+
 ;;fix chinese coding  解决中文字体显示为乱码 方框数字
  ;;(set-fontset-font "fontset-default"'gb18030' ("Microsoft YaHei" . "unicode-bmp"))
  (set-default-font "-outline-微软雅黑-normal-normal-normal-sans-21-*-*-*-p-*-iso8859-1")
@@ -208,8 +210,8 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;;设置竖向分割，即窗口为左右两屏，
-(setq split-height-threshold nil)
-(setq split-width-threshold 0)
+;;(setq split-height-threshold nil)
+;;(setq split-width-threshold 0)
 
 
 ;;; Local Variables:
