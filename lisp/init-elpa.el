@@ -6,6 +6,7 @@
 ;; Feel free to add more packages!
 (defvar melpa-include-packages
   '(ace-mc
+    cdlatex
     color-theme ; emacs24 need this package
     ace-window ; lastest stable is released on year 2014
     auto-package-update
@@ -182,6 +183,8 @@
 ;; Fire up package.el and ensure the following packages are installed.
 ;;------------------------------------------------------------------------------
 (require-package 'auctex);for tex
+(require-package 'cdlatex)
+;;(require-package 'auto-complete) 
 (require-package 'async)
 (require-package 'dash) ; required by string-edit
 ; color-theme 6.6.1 in elpa is buggy
