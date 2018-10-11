@@ -6,7 +6,6 @@
 ;; Feel free to add more packages!
 (defvar melpa-include-packages
   '(ace-mc
-    cdlatex ;安装辅助插件，撰写tex文件的自动补全
     color-theme ; emacs24 need this package
     ace-window ; lastest stable is released on year 2014
     auto-package-update
@@ -183,7 +182,6 @@
 ;; Fire up package.el and ensure the following packages are installed.
 ;;------------------------------------------------------------------------------
 (require-package 'auctex);for tex
-(require-package 'cdlatex)
 ;;(require-package 'auto-complete) 
 (require-package 'async)
 (require-package 'dash) ; required by string-edit
