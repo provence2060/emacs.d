@@ -194,7 +194,7 @@
                                      (setq TeX-save-query  nil )
                                       (setq TeX-show-compilation t)
                                                                    ))
-
+(load-file "~/.emacs.d/cdlatex.el");;加载cdlatex
 (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)   ; with AUCTeX LaTeX mode
 
 ;;fix chinese coding  解决中文字体显示为乱码 方框数字
