@@ -88,7 +88,9 @@
     zoutline
     ess
     company-c-headers
-    company-statistics)
+    company-statistics
+    julia-mode
+	  latex-preview-pane ; Makes LaTeX editing less painful by providing a updatable preview pane )
   "Packages to install from melpa-unstable.")
 
 (defvar melpa-stable-banned-packages nil
@@ -185,6 +187,7 @@
 (require-package 'auctex);for tex
 (require-package 'julia-mode) ;ess的依赖关系
 (require-package 'ess);Emacs Speaks Statistics
+(require-package 'latex-preview-pane);Makes LaTeX editing less painful by providing a updatable preview pane 
 ;;(require-package 'auto-complete) 
 (require-package 'async)
 (require-package 'dash) ; required by string-edit
