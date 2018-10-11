@@ -86,6 +86,7 @@
     erlang
     workgroups2
     zoutline
+    ess
     company-c-headers
     company-statistics)
   "Packages to install from melpa-unstable.")
@@ -182,6 +183,8 @@
 ;; Fire up package.el and ensure the following packages are installed.
 ;;------------------------------------------------------------------------------
 (require-package 'auctex);for tex
+(require-package 'julia-mode) ;ess的依赖关系
+(require-package 'ess);Emacs Speaks Statistics
 ;;(require-package 'auto-complete) 
 (require-package 'async)
 (require-package 'dash) ; required by string-edit
