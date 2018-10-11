@@ -339,6 +339,7 @@
   (require-package 'dracula-theme) ; recommended
   (require-package 'soothe-theme)
   (require-package 'dakrone-theme)
+  (require-package 'atom-one-dark)
   (require-package 'busybee-theme)
   (require-package 'bubbleberry-theme)
   (require-package 'cherry-blossom-theme)
