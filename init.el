@@ -212,6 +212,7 @@
 ;;(setq split-height-threshold nil)
 ;;(setq split-width-threshold 0)
 
+(load-theme 'atom-one-dark t);选择atom-one-dark主题
 
 ;;; Local Variables:
 ;;; no-byte-compile: t
