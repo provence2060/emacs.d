@@ -6,7 +6,7 @@
 ;; Feel free to add more packages!
 (defvar melpa-include-packages
   '(ace-mc
-    cdlatex ;安装auctex辅助插件，撰写tex文件的自动补全
+    cdlatex ;安装辅助插件，撰写tex文件的自动补全
     color-theme ; emacs24 need this package
     ace-window ; lastest stable is released on year 2014
     auto-package-update
@@ -53,7 +53,7 @@
     slime
     groovy-mode
     inf-ruby
-    ;; company ; I won't wait another 2 years for stable
+    company ; I won't wait another 2 years for stable
     simple-httpd
     dsvn
     move-text
