@@ -213,7 +213,7 @@
 ;;(setq split-width-threshold 0)
 
 (load-theme 'atom-one-dark t);选择atom-one-dark主题
-
+(latex-preview-pane-enable) 
 ;;; Local Variables:
 ;;; no-byte-compile: t
 ;;; End:
