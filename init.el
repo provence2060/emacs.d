@@ -208,6 +208,27 @@
 ;;开启emacs，窗口设置为最大化
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+;; ----------------------------- 
+;; 防止鼠标滚动太快
+(setq mouse-wheel-scroll-amount '(2 ((shift) . 2)((control)))
+mouse-wheel-progressive-speed nil
+scroll-step 2)
+
+;; --------------------------
+;; 滚屏
+(defun gcm-scroll-down ()
+      (interactive)
+      (scroll-up 4))
+(defun gcm-scroll-up ()
+      (interactive)
+      (scroll-down 4))
+(global-set-key [(control down)] 'gcm-scroll-down)
+(global-set-key [(control up)]   'gcm-scroll-up)
+
+
+;; 显示行号
+(global-linum-mode 1)
+
 ;;设置竖向分割，即窗口为左右两屏，
 ;;(setq split-height-threshold nil)
 ;;(setq split-width-threshold 0)
