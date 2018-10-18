@@ -121,16 +121,16 @@
   
   
   ;; init-evil dependent on init-clipboard
-  ;; (require-init 'init-clipboard)
+    (require-init 'init-clipboard)
   ;; use evil mode (vi key binding)
-  ;;(require-init 'init-evil)
+    (require-init 'init-evil)
      
   (require-init 'init-multiple-cursors)
   (require-init 'init-sh)
   (require-init 'init-ctags)
-   ;;because I not use them,so I note them  
-  ;;(require-init 'init-bbdb)
-  ;;(require-init 'init-gnus)
+    
+   (require-init 'init-bbdb)
+  (require-init 'init-gnus)
      
   (require-init 'init-lua-mode)
   (require-init 'init-workgroups2)
@@ -229,9 +229,6 @@ scroll-step 2)
 ;; 显示行号
 (global-linum-mode 1)
 
-;;设置竖向分割，即窗口为左右两屏，
-;;(setq split-height-threshold nil)
-;;(setq split-width-threshold 0)
 
 (load-theme 'atom-one-dark t);选择atom-one-dark主题
 (latex-preview-pane-enable) 
