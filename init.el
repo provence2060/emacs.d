@@ -347,6 +347,51 @@
   (when (require 'time-date nil t)
     (message "Emacs startup time: %d seconds."
              (time-to-seconds (time-since emacs-load-start-time))))
+(setq gc-cons-threshold best-gc-cons-threshold)
+
+    (add-hook 'LaTeX-mode-hook (lambda()
+                                  (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+                                  (setq TeX-command-default "XeLaTeX")
+                                     (setq TeX-save-query  nil )
+                                      (setq TeX-show-compilation t)
+                                                                   ))
+(load-file "~/.emacs.d/cdlatex.el");;加载cdlatex
+(add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)   ; with AUCTeX LaTeX mode
+
+;;fix chinese coding  解决中文字体显示为乱码 方框数字
+ ;;(set-fontset-font "fontset-default"'gb18030' ("Microsoft YaHei" . "unicode-bmp"))
+ (set-default-font "-outline-微软雅黑-normal-normal-normal-sans-21-*-*-*-p-*-iso8859-1")
+ 
+ ;;光标改为竖线形式
+ (setq-default cursor-type 'bar)
+ 
+
+;;开启emacs，窗口设置为最大化
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+;; ----------------------------- 
+;; 防止鼠标滚动太快
+(setq mouse-wheel-scroll-amount '(2 ((shift) . 2)((control)))
+mouse-wheel-progressive-speed nil
+scroll-step 2)
+
+;; --------------------------
+;; 滚屏
+(defun gcm-scroll-down ()
+      (interactive)
+      (scroll-up 4))
+(defun gcm-scroll-up ()
+      (interactive)
+      (scroll-down 4))
+(global-set-key [(control down)] 'gcm-scroll-down)
+(global-set-key [(control up)]   'gcm-scroll-up)
+
+
+;; 显示行号
+(global-linum-mode 1)
+
+
+(load-theme 'atom-one-dark t);选择atom-one-dark主题
 
   ;; @see https://github.com/hlissner/doom-emacs/wiki/FAQ
   ;; Adding directories under "~/.emacs.d/site-lisp/" to `load-path' slows
