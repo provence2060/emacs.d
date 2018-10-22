@@ -45,6 +45,7 @@
     heroku-theme
     hemisu-theme
     badger-theme
+    atom-one-dark
     distinguished-theme
     challenger-deep-theme
     wgrep
