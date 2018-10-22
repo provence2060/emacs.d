@@ -349,7 +349,7 @@
              (time-to-seconds (time-since emacs-load-start-time))))
 (setq gc-cons-threshold best-gc-cons-threshold)
 
-    (add-hook 'LaTeX-mode-hook (lambda()
+   (add-hook 'LaTeX-mode-hook (lambda()
                                   (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
                                   (setq TeX-command-default "XeLaTeX")
                                      (setq TeX-save-query  nil )
@@ -391,7 +391,7 @@ scroll-step 2)
 (global-linum-mode 1)
 
 
-(load-theme 'atom-one-dark t);选择atom-one-dark主题
+(load-theme 'atom-one-dark t);选择atom-one-dark主题 
 
   ;; @see https://github.com/hlissner/doom-emacs/wiki/FAQ
   ;; Adding directories under "~/.emacs.d/site-lisp/" to `load-path' slows
