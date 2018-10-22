@@ -89,8 +89,7 @@
     ess
     company-c-headers
     company-statistics
-    julia-mode
-	  latex-preview-pane ; Makes LaTeX editing less painful by providing a updatable preview pane )
+    julia-mode)
   "Packages to install from melpa-unstable.")
 
 (defvar melpa-stable-banned-packages nil
@@ -184,15 +183,14 @@
 ;;------------------------------------------------------------------------------
 ;; Fire up package.el and ensure the following packages are installed.
 ;;------------------------------------------------------------------------------
-(require-package 'auctex);for tex
-(require-package 'julia-mode) ;ess的依赖关系
-(require-package 'ess);Emacs Speaks Statistics
-(require-package 'latex-preview-pane);Makes LaTeX editing less painful by providing a updatable preview pane 
-;;(require-package 'auto-complete) 
 (require-package 'async)
 (require-package 'dash) ; required by string-edit
 ; color-theme 6.6.1 in elpa is buggy
 (require-package 'auto-compile)
+(require-package 'auctex);for tex
+(require-package 'julia-mode) ;ess的依赖关系
+(require-package 'ess);Emacs Speaks Statistics
+;;(require-package 'auto-complete) 
 (require-package 'smex)
 (require-package 'avy)
 (require-package 'auto-yasnippet)
