@@ -99,9 +99,11 @@
 ;; I don't use any packages from GNU ELPA because I want to minimize
 ;; dependency on 3rd party web site.
 (setq package-archives
-      '(;; comment below line if you need not use GNU ELPA
-        ;;because I need auctex from GNU ELPA, so i uncomment below line
-        ("gnu" . "https://elpa.gnu.org/packages/")
+      '(
+        ("orgmode" . "https://orgmode.org/elpa/")
+        ("melpa" . "http://melpa.org/packages/")
+		("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("gnu" . "http://elpa.gnu.org/packages/");  Only for AucTeX.
         ("localelpa" . "~/.emacs.d/localelpa/")
 
         ;; ;; {{ 163 repository:
@@ -117,10 +119,7 @@
         ;; ;; ("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
         ;; }}
 
-        ("melpa" . "https://melpa.org/packages/")
-        ("melpa-stable" . "https://stable.melpa.org/packages/")
         ))
-
 ;; Un-comment below line if you follow "Install stable version in easiest way"
 ;; (setq package-archives '(("myelpa" . "~/projs/myelpa")))
 
