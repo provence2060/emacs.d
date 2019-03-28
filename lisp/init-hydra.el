@@ -1,19 +1,27 @@
+;; -*- coding: utf-8; lexical-binding: t; -*-
+
 ;; @see https://github.com/abo-abo/hydra
-(unless (featurep 'hydra) (require 'hydra))
 
 ;; use similar key bindings as init-evil.el
 (defhydra hydra-launcher (:color blue)
   "
-^Emms^       ^Misc^
-------------------------------------------------
-_r_andom     _t_erm             _E_nable/Disable
-_n_ext       _a_utoComplete     _V_intage/Modern
-_p_revious   _C_reate workgroup Open recent _f_ile
-_P_ause      _l_oad workgroup   Recent _d_irectory
-_O_pen       _B_ookmark         Last dired _c_ommand
-_L_ Playlist Goto book_m_ark    Dired comand _h_istory
-_S_huffle    Undo _v_isualize   _b_ack
-_q_uit
+----------------------------------------------------------
+^Misc^                    ^Audio^               ^Pomodoro^
+----------------------------------------------------------
+[_u_] CompanyIspell       [_R_] Emms Random     [_s_] Start
+[_C_] New workgroup       [_n_] Emms Next       [_t_] Stop
+[_l_] Load workgroup      [_p_] Emms Previous   [_r_] Resume
+[_B_] New bookmark        [_P_] Emms Pause      [_a_] Pause
+[_m_] Goto bookmark       [_O_] Emms Open
+[_v_] Show/Hide undo      [_L_] Emms Playlist
+[_b_] Switch buffer       [_w_] Pronounce word
+[_f_] Recent file
+[_d_] Recent directory
+[_c_] Last dired command
+[_h_] Dired CMD history
+[_E_] Enable typewriter
+[_V_] Vintage typewriter
+[_q_] Quit
 "
   ("c" my-dired-redo-last-command)
   ("h" my-dired-redo-from-commands-history)
@@ -23,47 +31,28 @@ _q_uit
   ("d" counsel-recent-directory)
   ("C" wg-create-workgroup)
   ("l" my-wg-switch-workgroup)
-  ("t" ansi-term)
-  ("a" toggle-company-ispell)
+  ("u" toggle-company-ispell)
   ("E" toggle-typewriter)
   ("V" twm/toggle-sound-style)
   ("v" undo-tree-visualize)
-  ("r" emms-random)
+  ("s" pomodoro-start)
+  ("t" pomodoro-stop)
+  ("r" pomodoro-resume)
+  ("a" pomodoro-pause)
+  ("R" emms-random)
   ("n" emms-next)
+  ("w" my-pronounce-current-word)
   ("p" emms-previous)
   ("P" emms-pause)
   ("O" emms-play-playlist)
   ("b" back-to-previous-buffer)
   ("L" emms-playlist-mode-go)
-  ("S" (progn (emms-shuffle) (emms-random)))
-  ("q" nil))
-
-(defhydra multiple-cursors-hydra (:color green :hint nil)
-  "
-^Up^            ^Down^          ^Other^
-----------------------------------------------
-[_p_]   Next    [_n_]   Next    [_l_] Edit lines
-[_P_]   Skip    [_N_]   Skip    [_a_] Mark all
-[_M-p_] Unmark  [_M-n_] Unmark  [_r_] Mark by regexp
-^ ^             ^ ^             [_q_] Quit
-"
-  ("l" mc/edit-lines :exit t)
-  ("a" mc/mark-all-like-this :exit t)
-  ("n" mc/mark-next-like-this)
-  ("N" mc/skip-to-next-like-this)
-  ("M-n" mc/unmark-next-like-this)
-  ("p" mc/mark-previous-like-this)
-  ("P" mc/skip-to-previous-like-this)
-  ("M-p" mc/unmark-previous-like-this)
-  ("r" mc/mark-all-in-region-regexp :exit t)
   ("q" nil))
 
 ;; Because in message-mode/article-mode we've already use `y' as hotkey
 (global-set-key (kbd "C-c C-y") 'hydra-launcher/body)
-(global-set-key (kbd "C-c C-h") 'multiple-cursors-hydra/body)
 (defun org-mode-hook-hydra-setup ()
-  (local-set-key (kbd "C-c C-y") 'hydra-launcher/body)
-  (local-set-key (kbd "C-c C-h") 'multiple-cursors-hydra/body))
+  (local-set-key (kbd "C-c C-y") 'hydra-launcher/body))
 (add-hook 'org-mode-hook 'org-mode-hook-hydra-setup)
 
 ;; {{ mail
@@ -145,26 +134,51 @@ _q_uit
 ;; {{ dired
 (eval-after-load 'dired
   '(progn
+     (defun my-replace-dired-base (base)
+       "Change file name in `wdired-mode'"
+       (let* ((fp (dired-file-name-at-point))
+              (fb (file-name-nondirectory fp))
+              (ext (file-name-extension fp))
+              (dir (file-name-directory fp))
+              (nf (concat base "." ext)))
+         (when (yes-or-no-p (format "%s => %s at %s?"
+                                    fb nf dir))
+           (rename-file fp (concat dir nf)))))
+     (defun my-copy-file-info (fn)
+       (message "%s => clipboard & yank ring"
+                (copy-yank-str (funcall fn (dired-file-name-at-point)))))
      (defhydra hydra-dired (:color blue)
-       "?"
-       ("sa" (shell-command "periscope.py -l en *.mkv *.mp4 *.avi &") "All subtitles")
-       ("s1"
-        (let* ((video-file (dired-file-name-at-point))
-               (default-directory (file-name-directory video-file)))
-          (shell-command (format "periscope.py -l en %s &" (file-name-nondirectory video-file))))
-        "1 subtitle")
-       ("cc" (let* ((f (file-truename (dired-file-name-at-point))))
-               (copy-yank-str f)
-               (message "filename %s => clipboard & yank ring" f)) "Copy full path")
-       ("C" dired-do-copy "cp")
-       ("cf" find-file "Create new file")
+       "
+^File/Directory^    ^Copy Info^  ^Fetch Subtitles^
+----------------------------------------------------
+[_mv_] Move file    [_pp_] Path  [_sa_] All
+[_cf_] New file     [_nn_] Name  [_s1_] One
+[_rr_] Rename file  [_bb_] Base
+[_ff_] Find file    [_dd_] DIR
+[_mk_] New DIR
+[_rb_] Replace base
+[_C_]  Copy file
+^^                  ^^           [_q_]  Quit
+"
+       ("sa" (shell-command "periscope.py -l en *.mkv *.mp4 *.avi &"))
+       ("s1" (let* ((video-file (dired-file-name-at-point))
+                    (default-directory (file-name-directory video-file)))
+               (shell-command (format "periscope.py -l en %s &" (file-name-nondirectory video-file)))))
+       ("pp" (my-copy-file-info 'file-truename))
+       ("nn" (my-copy-file-info 'file-name-nondirectory))
+       ("bb" (my-copy-file-info 'file-name-base))
+       ("dd" (my-copy-file-info 'file-name-directory))
+       ("rb" (my-replace-dired-base (car kill-ring)))
+       ("C" dired-do-copy)
+       ("mv" diredp-do-move-recursive)
+       ("cf"find-file)
+       ("rr" dired-toggle-read-only)
        ("ff" (lambda (regexp)
                (interactive "sMatching regexp: ")
-               (find-lisp-find-dired default-directory regexp))  "Filter with Regex")
-       ("xq" dired-toggle-read-only "Rename file(s)")
-       ("mv" diredp-do-move-recursive "mv")
-       ("mk" dired-create-directory "mkdir")
-       ("q" nil "Bye"))))
+               (find-lisp-find-dired default-directory regexp)))
+       ("mk" dired-create-directory)
+       ("q" nil))))
+
 (defun dired-mode-hook-hydra-setup ()
   (local-set-key (kbd "y") 'hydra-dired/body))
 (add-hook 'dired-mode-hook 'dired-mode-hook-hydra-setup)
@@ -203,6 +217,43 @@ _w_ whitespace-mode:   %`whitespace-mode
 ;; }}
 
 ;; {{ @see https://github.com/abo-abo/hydra/wiki/Window-Management
+
+;; helpers from https://github.com/abo-abo/hydra/blob/master/hydra-examples.el
+(unless (featurep 'windmove)
+  (require 'windmove))
+
+(defun hydra-move-splitter-left (arg)
+  "Move window splitter left."
+  (interactive "p")
+  (if (let* ((windmove-wrap-around))
+        (windmove-find-other-window 'right))
+      (shrink-window-horizontally arg)
+    (enlarge-window-horizontally arg)))
+
+(defun hydra-move-splitter-right (arg)
+  "Move window splitter right."
+  (interactive "p")
+  (if (let* ((windmove-wrap-around))
+        (windmove-find-other-window 'right))
+      (enlarge-window-horizontally arg)
+    (shrink-window-horizontally arg)))
+
+(defun hydra-move-splitter-up (arg)
+  "Move window splitter up."
+  (interactive "p")
+  (if (let* ((windmove-wrap-around))
+        (windmove-find-other-window 'up))
+      (enlarge-window arg)
+    (shrink-window arg)))
+
+(defun hydra-move-splitter-down (arg)
+  "Move window splitter down."
+  (interactive "p")
+  (if (let* ((windmove-wrap-around))
+        (windmove-find-other-window 'up))
+      (shrink-window arg)
+    (enlarge-window arg)))
+
 (defhydra hydra-window ()
   "
 Movement^^   ^Split^         ^Switch^     ^Resize^
@@ -211,7 +262,7 @@ _h_ Left     _v_ertical      _b_uffer     _q_ X left
 _j_ Down     _x_ horizontal  _f_ind files _w_ X Down
 _k_ Top      _z_ undo        _a_ce 1      _e_ X Top
 _l_ Right    _Z_ reset       _s_wap       _r_ X Right
-_F_ollow     _D_lt Other     _S_ave       max_i_mize
+_F_ollow     _D_elete Other  _S_ave       max_i_mize
 _SPC_ cancel _o_nly this     _d_elete
 "
   ("h" windmove-left )
@@ -251,7 +302,7 @@ _SPC_ cancel _o_nly this     _d_elete
          (add-hook 'ace-window-end-once-hook
                    'hydra-window/body)))
   ("o" delete-other-windows)
-  ("i" ace-maximize-window)
+  ("i" ace-delete-other-windows)
   ("z" (progn
          (winner-undo)
          (setq this-command 'winner-undo)))
